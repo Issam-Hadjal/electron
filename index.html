@@ -1,18 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
-    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
-    <title>Hello from Electron renderer!</title>
+    <title>Consultations</title>
 </head>
 
 <body>
-    <h1>Hello from Electron renderer!</h1>
-    <p>👋</p>
-    <p id="info"></p>
+    <h1>Ajouter une consultation</h1>
+    <form id="consultation-form">
+        <input type="text" id="nom" placeholder="Nom" required /><br />
+        <input type="text" id="prenom" placeholder="Prénom" required /><br />
+        <input type="email" id="email" placeholder="Email" required /><br />
+        <input type="date" id="date" required /><br />
+        <button type="submit">Ajouter</button>
+    </form>
+
+    <h2>Patients enregistrés</h2>
+    <ul id="patients-list"></ul>
+
+    <script src="./renderer.js"></script>
 </body>
-<script src="./renderer.js"></script>
 
 </html>

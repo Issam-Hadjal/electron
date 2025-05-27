@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "publish": "electron-forge publish"
+    "publish": "electron-forge publish",
+    "build": "electron-builder"
   },
   "author": "Issam Hadjal",
   "license": "ISC",
@@ -22,10 +23,37 @@
     "@electron-forge/plugin-fuses": "^7.8.1",
     "@electron-forge/publisher-github": "^7.8.1",
     "@electron/fuses": "^1.8.0",
-    "electron": "^36.3.1"
+    "electron": "^36.3.1",
+    "electron-builder": "^26.0.12"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.1",
+    "better-sqlite3": "^11.10.0",
+    "nodemailer": "^7.0.3",
     "update-electron-app": "^3.1.1"
+  },
+  "build": {
+    "appId": "com.issam.electronapp",
+    "productName": "My_Electron_App",
+    "artifactName": "${productName}-Setup-${version}.${ext}",
+    "files": [
+      "**/*",
+      "!node_modules/*/{test,__tests__}/**",
+      "!*.md",
+      "!*.log"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "include": "build/installer.nsh",
+      "oneClick": false,
+      "createDesktopShortcut": false,
+      "createStartMenuShortcut": true,
+      "shortcutName": "My Electron App"
+    },
+    "directories": {
+      "output": "dist"
+    }
   }
 }

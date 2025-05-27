@@ -4,6 +4,8 @@ contextBridge.exposeInMainWorld('versions', {
     node: () => process.versions.node,
     chrome: () => process.versions.chrome,
     electron: () => process.versions.electron,
-    ping: () => ipcRenderer.invoke('ping')
-    // nous pouvons aussi exposer des variables en plus des fonctions
+    saveEmailConfig: (email, password) => ipcRenderer.invoke('save-email-config', email, password),
+    getEmailConfig: () => ipcRenderer.invoke('get-email-config'),
+    ajouterPatient: (nom, prenom, email, date) => ipcRenderer.invoke('ajouter-patient', nom, prenom, email, date),
+    getPatients: () => ipcRenderer.invoke('get-patients')
 })

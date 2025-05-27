@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Configuration Email</title>
+</head>
+
+<body>
+    <h1>Configurer l'envoi d'emails</h1>
+    <form id="config-form">
+        <label for="email">Adresse email :</label><br>
+        <input type="email" id="email" required /><br><br>
+
+        <label for="password">Mot de passe d'application :</label><br>
+        <input type="password" id="password" required /><br><br>
+        <details style="margin-top: 10px;">
+            <summary>❓ Comment générer un mot de passe d’application Gmail</summary>
+            <ol style="margin-top: 8px;">
+                <li>Ouvre <a href="https://myaccount.google.com/security" target="_blank">cette page Google</a></li>
+                <li>Active la <strong>vérification en deux étapes</strong> si ce n’est pas déjà fait</li>
+                <li>Va ensuite sur <a href="https://myaccount.google.com/apppasswords"
+                        target="_blank">https://myaccount.google.com/apppasswords</a> et rentre ton mot de pâsse Gmail normal</li>
+                <li>Choisis "Autre (personnalisé)" puis entre par exemple : <code>My_Electron_App</code></li>
+                <li>Google te donne un mot de passe à 16 caractères : <strong>copie-le</strong></li>
+                <li>Colle ce mot de passe ici dans le champ “Mot de passe d’application”</li>
+            </ol>
+            <p style="color: darkred; font-weight: bold;">⚠️ Ne mets pas ton mot de passe Gmail normal. Google bloquera
+                l'accès sinon.</p>
+        </details>
+
+        <button type="submit">Enregistrer</button>
+    </form>
+
+    <p id="status"></p>
+
+    <script>
+        const form = document.getElementById('config-form');
+        const status = document.getElementById('status');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                await window.versions.saveEmailConfig(email, password);
+                status.textContent = '✅ Configuration enregistrée';
+                form.reset();
+            } catch (err) {
+                status.textContent = '❌ Erreur : ' + err.message;
+            }
+        });
+    </script>
+</body>
+
+</html>
